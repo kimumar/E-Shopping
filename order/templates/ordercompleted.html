@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block title %} Order Completed {% endblock title %}
+
+{% block keywords %} {{product.keywords}} {% endblock keywords %}
+
+{% block description %} {{product.description}} {% endblock description %}
+    
+
+
+<!-- topbar area  -->
+{% block topbar %} {% include 'topbar.html' %} {% endblock topbar %}
+    
+<!-- navbar area  -->
+{% block navbar %} {% include 'navbar.html' %} {% endblock navbar %}               
+                           
+<!-- slider area   -->
+{% block banner %} {% include 'banner.html' %} {% endblock banner %}                    
+ 
+<!-- info area    -->
+{% block info %} {% include 'info.html' %} {% endblock info %}                  
+        
+<!-- content area       -->
+{% block content %}				
+			<section class="header_text sub">
+			
+				<h4><span>Order Completed</span></h4>
+			</section>	
+			<section class="main-content">
+				<div class="row">
+					<div class="span12">
+						<div class="accordion" id="accordion2">
+							<div class="accordion-group">
+								<div class="accordion-heading">
+									<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">Checkout Details</a>
+								</div>
+								<div id="collapseOne" class="accordion-body in collapse">
+									<div class="accordion-inner">
+										<div class="row-fluid">
+											<div class="span6">
+												<div class="control-group">
+													<h3>Order Completed</h3>
+												</div>
+												<hr>
+												<h2>Dear {{profile.user.first_name}} {{profile.user.last_name}}</h2>
+												<hr>
+												<h3>Your Order is Completed</h3>
+												<h3>Order Code: {{order_code}}</h3>
+												<h3>Thank You</h3>
+												<hr>
+											 </div>
+											 <div class="span6">
+												<div class="row-fluid">
+													<h4 class="title"><span class="text"><strong> Completed Order List</strong></span></h4>
+													<table class="table table-striped">
+														<thead>
+															<tr>
+																<th>Image</th>
+																<th>Product Name</th>
+																<th>Quantity</th>
+																<th>$Unit Price</th>
+																<th>$Amount</th>
+																<!-- <th>$Total</th> -->
+															</tr>
+														</thead>
+															
+															{% for item in shopcart %}
+															<tr>
+																<td><img alt="" src="{{item.product.image.url}}" style="height: 80px; width: 160px;"></td>
+																<td>{{item.product.title}}</td> 
+																<td>{{item.quantity}}</td>
+																<td>{{item.price| intcomma}}</td>
+																<td>{{item.amount}}</td>    
+															</tr> 
+															{% endfor %}   	
+														</tbody>
+													</table>
+													<hr>
+													<p class="cart-total right">
+														<strong>Total</strong>:<strong>${{grandtotal | floatformat:2 | intcomma}}</strong><br>
+														<strong> </strong>: <br>
+														<strong></strong>:#17.50<br>
+														<strong></strong>: <br>
+													</p>
+													<hr/>					
+												</div>
+											</div>
+										</div>			
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>				
+				</div>
+			</section>			
+	{% endblock content %}                       
+        
+	<!-- footer area  -->
+	{% block footer %} {% include 'footer.html' %} {% endblock footer %} 

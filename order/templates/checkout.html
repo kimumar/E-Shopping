@@ -1,0 +1,188 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% load humanize %}
+
+
+{% block title %} Checkout {% endblock title %}
+
+{% block keywords %} {{product.keywords}} {% endblock keywords %}
+
+{% block description %} {{product.description}} {% endblock description %}
+    
+
+
+<!-- topbar area  -->
+{% block topbar %} {% include 'topbar.html' %} {% endblock topbar %}
+    
+<!-- navbar area  -->
+{% block navbar %} {% include 'navbar.html' %} {% endblock navbar %}               
+                           
+<!-- slider area   -->
+{% block banner %} {% include 'banner.html' %} {% endblock banner %}                    
+ 
+<!-- info area    -->
+{% block info %} {% include 'info.html' %} {% endblock info %}                  
+        
+<!-- content area       -->
+{% block content %}				
+			<section class="header_text sub">
+			
+				<h4><span>Checkout Section</span></h4>
+			</section>	
+			<section class="main-content">
+				<div class="row">
+					<div class="span12">
+						<div class="accordion" id="accordion2">
+							<div class="accordion-group">
+								<div class="accordion-heading">
+									<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">Checkout Details</a>
+								</div>
+								<div id="collapseOne" class="accordion-body in collapse">
+									<div class="accordion-inner">
+										<div class="row-fluid">
+											<form action="{% url 'order:placeorder' %}" method="POST">
+												{% csrf_token %}
+												<div class="span6">
+													<h4>Your Personal Details</h4>
+													<div class="control-group">
+														<label class="control-label">First Name</label>
+														<div class="controls">
+															<input type="text" value="{{ user.first_name }}" placeholder="" class="input-xlarge">
+														</div>
+													</div>
+													<div class="control-group">
+														<label class="control-label">Last Name</label>
+														<div class="controls">
+															<input type="text" value="{{ user.last_name }}" placeholder="" class="input-xlarge">
+														</div>
+													</div>					  
+													<div class="control-group">
+														<label class="control-label">Phone</label>
+														<div class="controls">
+															<input type="text" value="{{ profile.phone }}" placeholder="" class="input-xlarge">
+														</div>
+													</div>
+													<div class="control-group">
+														<label class="control-label"><span class="required">*</span> Address:</label>
+														<div class="controls">
+															<input type="text" value="{{profile.address }}" placeholder="" class="input-xlarge">
+														</div>
+													</div>
+													<div class="control-group">
+														<label class="control-label"><span class="required">*</span> City:</label>
+														<div class="controls">
+															<input type="text" value="{{profile.city }}" placeholder="" class="input-xlarge">
+														</div>
+													</div>
+													<div class="control-group">
+														<label class="control-label"><span class="required">*</span> State:</label>
+														<div class="controls">
+															<input type="text" value="{{profile.state }}" placeholder="" class="input-xlarge">
+														</div>
+													</div>
+													<div class="control-group">
+														<label class="control-label"><span class="required">*</span> Country:</label>
+														<div class="controls">
+															<input type="text" value="{{profile.country }}" placeholder="" class="input-xlarge">
+														</div>
+														<div class="control-group">
+															<label class="control-label"><span class="required">*</span> Total:${{grandtotal | floatformat:2 | intcomma}}</label>
+															<div class="controls">
+																<input type="hidden" name="amount" value="{{grandtotal | intcomma}}">
+																<input type="hidden" name="order_number" value="{{order_code}}">
+															</div>
+														</div>
+														<button type="submit" class="btn btn-inverse pull-right">Proceed To Order</button>
+													</div>
+												</div>
+												<div class="span6">
+													<!-- <h4>Billing Details</h4>
+													<div class="control-group">
+														<label class="control-label">Total Bill</label>
+														<div class="controls">
+															<input type="text" value="{{grandtotal}}" placeholder="" class="input-xlarge">
+														</div>
+													</div>
+													<div class="control-group">
+														<label class="control-label">Enter Name On Card</label>
+														<div class="controls">
+															<input type="text" value="" placeholder="" class="input-xlarge">
+														</div>
+													</div>					  
+													<div class="control-group">
+														<label class="control-label">Enter Card Number</label>
+														<div class="controls">
+															<input type="text" value="" placeholder="" class="input-xlarge">
+														</div>
+													</div>
+													<div class="control-group">
+														<label class="control-label">Enter Card Expiry Date/Year</label>
+														<div class="controls">
+															<input type="text" value="" placeholder="" class="input-xlarge">
+														</div>
+													</div>
+													<div class="control-group">
+														<label class="control-label">Enter Pin Code</label>
+														<div class="controls">
+															<input type="text" value="" placeholder="" class="input-xlarge">
+														</div>
+													</div> -->
+												</div>
+											</form>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="accordion-group">
+								<div class="accordion-heading">
+									<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">Shopcart Order Details</a>
+								</div>
+								<div id="collapseTwo" class="accordion-body collapse">
+									<div class="accordion-inner">
+										<div class="row-fluid">
+											<h4 class="title"><span class="text"><strong>Shopcart Product List</strong></span></h4>
+											<table class="table table-striped">
+												<thead>
+													<tr>
+														<th>Image</th>
+														<th>Product Name</th>
+														<th>Quantity</th>
+														<th>$Unit Price</th>
+														<th>$Amount</th>
+														<th>$Total</th>
+													</tr>
+												</thead>
+													
+													{% for item in shopcart %}
+													<tr>
+														<td><img alt="" src="{{item.product.image.url}}" style="height: 80px; width: 160px;"></td>
+														<td>{{item.product.title}}</td> 
+														<td>{{item.quantity}}</td>
+														<td>{{item.price}}</td>
+														<td>{{item.amount}}</td>    
+													</tr> 
+													{% endfor %}   	
+												</tbody>
+											</table>
+											<hr>
+											<p class="cart-total right">
+												<strong></strong>: <br>
+												<strong></strong>:<br>
+												<strong></strong>: <br>
+												<strong></strong>: <br>
+												<strong>Total</strong>:<strong>${{total}}</strong><br>
+											</p>
+											<hr/>					
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>				
+				</div>
+			</section>			
+	{% endblock content %}                       
+        
+	<!-- footer area  -->
+	{% block footer %} {% include 'footer.html' %} {% endblock footer %} 

@@ -1,0 +1,18 @@
+{% extends 'admin/base.html' %}
+
+{% load static %}
+
+
+{% block branding %}
+    <h1 id="head">
+        <img src="{% static 'themes/images/logo.png' %}" alt="Alpha Store" height="50" width="60" class="brand_img">
+        Admin Area
+    </h1>
+{% endblock branding %}
+    
+
+{% block extrastyle %}
+<link href="{% static 'css/admin.css' %}" rel="stylesheet"> 
+<link rel="icon" type="image/png" sizes="96x96" href="{% static '' %}images/favicon-96x96.png">
+{% endblock extrastyle %}
+    

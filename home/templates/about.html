@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %} About Us| {{ setting.title}} {% endblock title %}
+
+ {% block keywords %} {{ setting.keywords}} {% endblock keywords %}
+
+{% block description %} {{setting.description}} {% endblock description %}
+
+
+
+{% block topbar %}{% include "topbar.html" %}{% endblock topbar %}
+
+{% block navbar %} {% include "navbar.html" %} {% endblock navbar %}
+
+{% block banner %} {% include 'banner.html' %} {% endblock banner %} 
+
+{% block content %}
+
+<div class="span8">					
+    {{setting.about|safe}}				
+</div>
+
+{% endblock content %}
+
+
+{% block footer %} {% include "footer.html" %} {% endblock footer %}

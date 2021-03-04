@@ -1,0 +1,152 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %} {{catdata.title}} Products {% endblock title %}
+
+{% block keywords %} {{catdata.keywords}} {% endblock keywords %}
+
+{% block description %} {{catdata.description}} {% endblock description %}
+    
+        
+
+<!-- topbar area  -->
+{% block topbar %} {% include 'topbar.html' %} {% endblock topbar %}
+    
+<!-- navbar area  -->
+{% block navbar %} {% include 'navbar.html' %} {% endblock navbar %}               
+                           
+<!-- slider area   -->
+{% block banner %} {% include 'banner.html' %} {% endblock banner %}                  
+ 
+<!-- info area    -->
+{% block info %} {% include 'info.html' %} {% endblock info %}                  
+        
+<!-- content area       -->
+{% block content %} 
+
+<section class="main-content">
+				
+    <div class="row">						
+        <div class="span9">								
+            <ul class="thumbnails listing-products">
+                {% for item in products %}
+                <li class="span3">
+                    <div class="product-box">
+                        <span class="sale_tag"></span>												
+                        <a href="{% url 'prod_detail' item.id item.slug %}"><img alt="" src="{{item.image.url}}"></a><br/>
+                        <a href="{% url 'prod_detail' item.id item.slug %}" class="title">{{item.title}}</a><br/>
+                        <a href="{% url 'prod_detail' item.id item.slug %}" class="category">{{item.category}}</a>
+                         <p class="price">
+                            {% if item.discount_price %}
+                                <del>${{item.price}}</del>
+                                <span>${{ item.discount_price }}</span>
+                            {% else %}
+                                <span>${{ item.price }}</span>
+                            {% endif %} 
+                        </p>
+                        <a href="{% url 'order:addtoshopcart' %}"><button class="btn btn-inverse" type="submit"><h4 style="color: orangered;">Add to cart</button></h4></a>
+                    </div>
+                </li> 
+                {% endfor %}
+            </ul>								
+            <hr>
+            <div class="pagination pagination-small pagination-centered">
+                <ul>
+                    <li><a href="#">Prev</a></li>
+                    <li class="active"><a href="#">1</a></li>
+                    <li><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li><a href="#">4</a></li>
+                    <li><a href="#">Next</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="span3 col">
+            <div class="block">	
+                <ul class="nav nav-list">
+                    <li class="nav-header">CATEGORIES</li>
+                    {% for item in category %}
+                        <li><a href="{% url 'category_prod' item.id item.slug %}">{{item.title}}</a></li> 
+                    {% endfor %}
+                </ul>
+                <br/>
+            </div>
+            <div class="block">
+                <h4 class="title">
+                    <span class="pull-left"><span class="text">Randomize</span></span>
+                    <span class="pull-right">
+                        <a class="left button" href="#myCarousel" data-slide="prev"></a><a class="right button" href="#myCarousel" data-slide="next"></a>
+                    </span>
+                </h4>
+                <div id="myCarousel" class="carousel slide">
+                    <div class="carousel-inner">
+                        <div class="active item">
+                            <ul class="thumbnails listing-products">									
+                                {% for item in randomize %}                            
+                                <li>
+                                    <img alt="" src="{{item.image.url}}"><br/>
+                                    <a href="{% url 'prod_detail' item.id item.slug %}">{{ item.title }}</a><br>                                									
+                                    <a href="#" class="category">{{item.category}}</a>
+                                    <p class="price">
+                                        {% if item.discount_price %}
+                                            <del>${{item.price}}</del>
+                                            <span>${{ item.discount_price }}</span>
+                                        {% else %}
+                                            <span>${{ item.price }}</span>
+                                        {% endif %} 
+                                    </p>
+                                </li> 
+                                {% endfor%}	
+                            </ul>
+                        </div>
+                        <div class="item">
+                            <ul>									
+                                {% for item in randomise %}                            
+                                <li>
+                                    <img alt="" src="{{item.image.url}}"><br/>
+                                    <a href="{% url 'prod_detail' item.id item.slug %}">{{ item.title }}</a><br>                                									
+                                    <a href="#" class="category">{{item.category}}</a>
+                                    <p class="price">
+                                        {% if item.discount_price %}
+                                            <del>${{item.price}}</del>
+                                            <span>${{ item.discount_price }}</span>
+                                        {% else %}
+                                            <span>${{ item.price }}</span>
+                                        {% endif %} 
+                                    </p>
+                                </li>                                    									
+                                {% endfor%}	
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="block">								
+                <h4 class="title"><strong>Best</strong> Seller</h4>								
+                <ul class="small-product">
+                    {% for item in bestseller %} 
+                    <li>
+                        <a href="{% url 'prod_detail' item.id item.slug %}">
+                            <p style="font-size: 15px;">
+                            <img src="{{item.image.url}}"  alt="Praesent tempor sem sodales" title="">{{ item.title }}
+                            </p>
+                        </a>
+                    </li>                                                            									
+                    {% endfor%}	
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+{% endblock content %}                       
+     
+<!-- footer area  -->
+{% block footer %} {% include 'footer.html' %} {% endblock footer %} 
+    
+
+    
+
+    

@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block tittle %} User Login {{setting.title}} {% endblock tittle %}    
+{% block keyword %} {{setting.keyword}} {% endblock keyword %}  
+{% block description %} {{ setting.description }} {% endblock description %}
+
+
+{% block topbar %} {% include 'topbar.html' %} {% endblock topbar %}
+
+{% block banner %} {% include 'banner.html' %} {% endblock banner %} 
+
+{% block info %} {% include 'info.html' %} {% endblock info %}   
+
+{% block content %} 
+
+<section class="main-content">				
+    <div class="row">
+        <div class="span8">					
+            <h4 class="title"><span class="text"><strong>Login</strong> Form</span></h4>
+            <form action="{% url 'loginform' %}" method="POST"> 
+                {% csrf_token %}
+                <fieldset>
+                    <div class="control-group">
+                        <div class="controls">
+                        <label for="username">Username</label>
+                        <input type="text" id="username" name="username" placeholder="Enter your username">
+                        <br>
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="password" placeholder="Enter your password">
+                        <hr> 
+                        </div>
+                        <input tabindex="3" class="btn btn-inverse large" type="submit" value="Sign into your account">
+                    </div>
+                </fieldset> 
+            </form>	
+            <div class="control-group">
+                <hr>
+                <p>If you do not have an account, kindly <a href="{% url 'signupform' %}">Signup</a></p>
+                <p class="reset">Forgot Password? Click<a tabindex="4" href="" title="Reset your password">Password</a></p>
+            </div>   			
+        </div>
+        <div class="span4"></div>
+    </div>
+</section>			
+{% endblock content %}
+
+
+{% block footer %} {% include 'footer.html' %}  {% endblock footer %}

@@ -1,0 +1,36 @@
+{% extends "shared/layout.html" %}
+
+{% block titlearea %}
+  {{ post.title}}
+{% endblock titlearea %}
+
+
+{% block contentarea %}
+
+<h1>
+    Login
+</h1>
+<div>
+    {% if form %}
+    <p> Invalid username/password</p>
+        
+    {% endif %}
+    {% if next %}
+      <p>You need to login to acess this page</p>
+    {% endif %}
+
+    <form action="{% url 'login' %}" method="POST">
+    {% csrf_token %}
+    <p> Usename: {{ form.username }}</p>
+    <p>password: {{ form.password }}</p>
+    <p>
+        <input class="btn" type="submit" value="login">
+        <input class="hidden" name="next" value="{{next}}">
+    </p>
+</form> 
+<p>
+  Forgot Password? Click <a href="{% url 'password_reset' %}"> here to reset</a> 
+</p>
+</div>
+
+{% endblock contentarea %}

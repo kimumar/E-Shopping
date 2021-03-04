@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block tittle %} User Sign up {{setting.title}} {% endblock tittle %}    
+{% block keyword %} {{setting.keyword}} {% endblock keyword %}  
+{% block description %} {{ setting.description }} {% endblock description %}
+
+
+{% block topbar %} {% include 'topbar.html' %} {% endblock topbar %}
+
+{% block banner %} {% include 'banner.html' %} {% endblock banner %}
+
+{% block info %} {% include 'info.html' %} {% endblock info %}   
+
+
+{% block content %} 
+
+<section class="main-content">				
+    <div class="row">
+        
+        <div class="span7">					
+            <h4 class="title"><span class="text"><strong>Signup</strong> Form</span></h4>
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-{{message.tags}}" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        {{message}}
+                    </div>
+                {% endfor %}
+            {% endif %}
+            <form action="{% url 'signupform' %}" method="POST" class="form-stacked">
+                {% csrf_token %}
+                {% for field in form  %}
+                <p>
+                    {{field.label_tag}} <br>
+                    {{field}}
+                    
+                    {% if field.help_text %}
+                        <small>{{field.help_tag}}</small>                        
+                    {% endif %}
+                        {% for error in field.errors %}
+                            <p>{{error}}</p>                      
+                        {% endfor %}                        
+                </p>                  
+                {% endfor %}
+                 <hr>
+                <div class="actions"><input tabindex="9" class="btn btn-inverse large" type="submit" value="Create your account"></div>
+            </form>					
+        </div>	
+        <div class="span5"></div>			
+    </div>
+</section>			
+{% endblock content %}
+
+
+{% block footer %} {% include 'footer.html' %}  {% endblock footer %}

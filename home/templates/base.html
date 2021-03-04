@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+	<head>
+        <meta charset="utf-8">   
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+         <!-- Font Awesome -->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">	
+		<link rel="icon" type="image/png" sizes="96x96" href="{% static '' %}images/favicon-96x96.png">
+
+        <title>{% block title %} Umar Pro Store {% endblock title %}</title>
+        <meta name="keywords" content="{% block keywords %} Home {% endblock keywords %}">  
+        <meta name="description" content="{% block description %} Home {% endblock description %}">         
+		<!--[if ie]><meta content='IE=8' http-equiv='X-UA-Compatible'/><![endif]-->
+		<!-- bootstrap -->
+		<link href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">      
+		<link href="{% static '' %}bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
+		
+		<link href="{% static '' %}themes/css/bootstrappage.css" rel="stylesheet"/>
+		
+		<!-- global styles -->
+		<link href="{% static '' %}themes/css/flexslider.css" rel="stylesheet"/>
+		<link href="{% static '' %}themes/css/main.css" rel="stylesheet"/>
+
+		<!-- scripts -->
+		<script src="{% static '' %}themes/css/jquery.fancybox.css"></script>
+		<script src="{% static '' %}themes/js/jquery-1.7.2.min.js"></script>
+		<script src="{% static '' %}bootstrap/js/bootstrap.js"></script>				
+		<script src="{% static '' %}bootstrap/js/bootstrap.min.js"></script>
+		<script src="{% static '' %}themes/js/superfish.js"></script>	
+		<script src="{% static '' %}themes/js/jquery.scrolltotop.js"></script>
+		<!--[if lt IE 9]>			
+			<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+			<script src="js/respond.min.js"></script>
+		<![endif]-->
+	</head>
+    <body>
+		{% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-{{message.tags}}" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        {{message}}
+                    </div>
+                {% endfor %}
+            {% endif %}		
+            <!-- topbar area  -->
+            {% block topbar %} {% endblock topbar %}
+            
+		<div id="wrapper" class="container">
+			<!-- navbar area  -->
+            {% block navbar %} {% endblock navbar %}               
+                           
+				<!-- banner area  -->
+			{% block banner %}  {% endblock banner %}
+
+               <!-- slider area   -->
+            {% block slider %} {% endblock slider %}                   
+                
+              <!-- info area    -->
+            {% block info %}  {% endblock info %}                  
+                       
+               <!-- content area       -->
+            {% block content %} {% endblock content %}                       
+                    
+              <!-- footer area  -->
+            {% block footer %} {% endblock footer %}                                
+			
+		</div>
+		<script src="{% static '' %}themes/js/common.js"></script>
+		<script src="{% static '' %}themes/js/jquery.flexslider-min.js"></script>
+		<script type="text/javascript">
+			$(function() {
+				$(document).ready(function() {
+					$('.flexslider').flexslider({
+						animation: "fade",
+						slideshowSpeed: 4000,
+						animationSpeed: 600,
+						controlNav: false,
+						directionNav: true,
+						controlsContainer: ".flex-container" // the container that holds the flexslider
+					});
+				});
+			});
+        </script>
+        <div id="topcontrol" title="Scroll Back to Top" style="position: fixed; bottom: 12px; right: 0px; opacity: 1; cursor: pointer;">
+            <img src="{{setting.gotop.url}}" style="width:40px; height:40px; margin-top: 25px; margin-right: 17px;">
+        </div>
+    </body>
+</html>

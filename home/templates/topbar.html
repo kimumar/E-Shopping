@@ -1,0 +1,47 @@
+{% load static %}
+
+<div id="top-bar" class="container">
+    <div class="row">
+        <div class="span4">
+            <form action="" method="POST" class="search_form">  
+                <input type="text" id="query" name="query" class="input-block-level search-query" Placeholder="Enter Your">
+            </form>
+        </div>
+        <div class="span8">
+            <div class="account pull-right">
+                <ul class="user-menu">	
+                    {% if user.id is not None %}                   
+                        <!-- <li><a href="{% url 'user' %}"><img src="{{ request.session.userimage }}" style="height: 40px; border-radius: 30%"></li></a>         -->
+                        <li><a href=""><img src="{{profile.image.url}}" alt="" style="border-radius: 30px; height:50px"></a></li>
+                        <li>                           
+                           welcome! <a href="{% url 'user' %}">
+                                {% if request.user.first_name %}
+                                    <p><strong> {{request.user.first_name}}</strong></p>    
+                                {% else %}
+                                    <p><strong>{{request.user.username}}</strong></p>
+                                {% endif %}
+                           </a>
+                        </li>
+                        <li><a href="{% url 'logoutfunc' %}">Logout</a></li>
+                        <li><a href="">Change Password</a></li> 
+                    {% else %}
+                        <li><a href="{% url 'loginform' %}">Login</a></li>
+                        <li><a href="{% url 'signupform' %}">Signup</a></li>	
+                    {% endif %}	
+                    <li><a href="{% url 'user' %}">My Account</a></li>
+                    <li>    
+                        <a href="{% url 'order:shopcart' %}"><i class="fas fa-shopping-cart"><span class="badge red z-depth-1 mr-1"></span></i>Your Cart</a>
+                            
+                            {% if itemcount > 0 %}
+                                <span class="badge red z-depth-1 mr-1">{{itemcount}}</span>
+                            {% else %}
+                                <span class="badge red z-depth-1 mr-1">0</span>
+                            {% endif %}
+                                
+                    </li>
+                    <li><a href="{% url 'order:checkout' %}">Checkout</a></li>
+                </ul>       
+            </div>
+        </div>
+    </div>
+</div>

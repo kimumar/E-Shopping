@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block tittle %} {{user.first_name}} Profile Update {% endblock tittle %}    
+{% block keyword %} {{setting.keyword}} {% endblock keyword %}  
+{% block description %} {{ setting.description }} {% endblock description %}
+
+
+{% block topbar %} {% include 'topbar.html' %} {% endblock topbar %}
+
+{% block navbar %} {% include 'navbar.html' %} {% endblock navbar %} 
+
+{% block banner %} {% include 'banner.html' %} {% endblock banner %}
+
+{% block info %} {% include 'info.html' %} {% endblock info %}   
+
+{% block content %} 
+
+<section class="main-content">				
+    <div class="row">
+        <div class="span3">				
+            {% include "userpanel.html" %}
+        </div>
+        <div class="span9">					
+            <h4 class="title"><span class="text"><strong>User</strong> Profile Update</span></h4>
+            {% if messages %}
+                {% for message in messages  %}
+                    <div  class="alert alert-{{message.tags}}" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        {{ message|safe }}
+                    </div>									  
+                {% endfor %}								  
+            {% endif %}	
+            <form action="{% url 'userupdate' %}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <fieldset class="form-group">
+                    {{userform.as_p}}
+                    {{profileform.as_p}}
+                </fieldset>
+                <div class="form-group">
+                    <button class="primary-btn" type="submit">Update</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>			
+{% endblock content %}
+
+
+{% block footer %} {% include 'footer.html' %}  {% endblock footer %}

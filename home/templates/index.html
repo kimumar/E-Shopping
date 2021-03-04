@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %} {{setting.title}} {% endblock title %}
+
+{% block keywords %} {{setting.keywords}} {% endblock keywords %}
+
+{% block description %} {{setting.description}} {% endblock description %}
+    
+
+        
+
+<!-- topbar area  -->
+{% block topbar %} {% include 'topbar.html' %} {% endblock topbar %}
+    
+<!-- navbar area  -->
+{% block navbar %} {% include 'navbar.html' %} {% endblock navbar %}               
+                           
+<!-- slider area   -->
+{% block slider %} {% include 'slider.html' %} {% endblock slider %}                   
+ 
+<!-- info area    -->
+{% block info %} {% include 'info.html' %} {% endblock info %}                  
+        
+<!-- content area       -->
+{% block content %} {% include 'content.html' %} {% endblock content %}                       
+     
+<!-- footer area  -->
+{% block footer %} {% include 'footer.html' %} {% endblock footer %} 
+    
+
+    
+
+    

@@ -1,0 +1,1 @@
+web: gunicorn shopperapp.wsgi --log-file -
